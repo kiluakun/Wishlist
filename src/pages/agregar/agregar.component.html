@@ -1,0 +1,71 @@
+<ion-header>
+    <ion-navbar color="primary">
+        <ion-title>{{ listName | placeholder:'New Whishlist' }}</ion-title>
+    </ion-navbar>
+</ion-header>
+
+<ion-content padding>
+
+    <h1>New Whishlist</h1>
+
+    <ion-card>
+
+        <ion-card-header>
+            
+            <ion-item>
+                <ion-label floating>Wishlist name</ion-label>
+                <ion-input type="text" [(ngModel)]="listName" name="listName"></ion-input>
+            </ion-item>
+
+        </ion-card-header>
+
+        <ion-card-content>
+            <ion-list>
+
+                <ion-item>
+                    <ion-label floating>Item:</ion-label>
+                    <ion-input (keyup.enter)="agregarItem()"
+                        type="text" [(ngModel)]="itemName" name="itemName"></ion-input>
+                </ion-item>
+
+                <button (click)="agregarItem()"
+                    ion-button class="button-block" >
+                    <ion-icon ios="ios-add-circle" md="md-add-circle"></ion-icon>
+                </button>
+
+            </ion-list>
+        </ion-card-content>
+
+    </ion-card>
+        
+    <ion-card *ngIf="this.items.length > 0">
+        <ion-card-header>
+            <h3>Added items</h3>
+        </ion-card-header>
+
+        <ion-card-content>
+            <ion-list>
+                <ion-item *ngFor="let item of this.items; let i = index">
+                    <button ion-button color="dark" clear>
+                        {{ item.name }}
+                    </button>
+
+                    <button (click)="eliminarItem(i)"
+                        ion-button outline item-right color="danger" >
+                        <ion-icon ios="ios-trash" md="md-trash"></ion-icon>
+                        borrar item {{ i + 1 }}
+                    </button>
+
+                </ion-item>
+            </ion-list>
+        </ion-card-content>
+    </ion-card>
+
+    <button (click)="guardarLista()"
+        ion-button icon-left class="button-block">
+        <ion-icon ios="ios-add-circle" md="md-add-circle"></ion-icon>
+        Agregar lista
+    </button>
+
+
+</ion-content>
